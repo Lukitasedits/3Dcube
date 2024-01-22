@@ -1,5 +1,14 @@
 {
+  "name": "example-name",
+  "version": "1.0.0",
+  "description": "example description",
+  "main": "index.js",
   "devDependencies": {
     "parcel": "^2.11.0"
+  },
+  "dependencies": {
+    "@parcel/config-default": "^2.11.0",
+    "parcel-reporter-static-files-copy": "^1.5.3",
+    "three": "^0.160.0"
   }
 }
