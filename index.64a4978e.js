@@ -33468,7 +33468,6 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Cube", ()=>Cube);
 var _three = require("three");
-var _tweenJs = require("@tweenjs/tween.js");
 var _piece = require("./piece");
 var _controls = require("./controls");
 var _axis = require("./axis");
@@ -33506,7 +33505,7 @@ class Cube {
     }
 }
 
-},{"three":"ktPTu","@tweenjs/tween.js":"7DfAI","./piece":"ia8wM","./controls":"1Ohk6","./axis":"hjS03","./template":"4H7TW","./algorithmsApplier":"btYDf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ia8wM":[function(require,module,exports) {
+},{"three":"ktPTu","./piece":"ia8wM","./controls":"1Ohk6","./axis":"hjS03","./template":"4H7TW","./algorithmsApplier":"btYDf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ia8wM":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Piece", ()=>Piece);
@@ -36707,6 +36706,8 @@ parcelHelpers.export(exports, "Controls", ()=>Controls);
 var _three = require("three");
 var _movements = require("./movements");
 var _algorithmsApplier = require("./algorithmsApplier");
+var _tweenJs = require("@tweenjs/tween.js");
+var _css2Drenderer = require("three/examples/jsm/renderers/CSS2DRenderer");
 class Controls {
     constructor(cube){
         this._cube = cube;
@@ -36842,13 +36843,13 @@ class Controls {
             const startPosition = camera.position.clone();
             const endPosition = new _three.Vector3(factor * 3, factor * 3, factor * 3);
             const cameraRotation = camera.rotation.clone();
-            const tween = new TWEEN.Tween({
+            const tween = new _tweenJs.Tween({
                 pos: startPosition,
                 rot: cameraRotation
             }).to({
                 pos: endPosition,
                 rot: cameraRotation
-            }, 500).easing(TWEEN.Easing.Quadratic.Out) // Easing para una transición suave
+            }, 500).easing(_tweenJs.Easing.Quadratic.Out) // Easing para una transición suave
             .onUpdate((c)=>{
                 camera.position.copy(c.pos);
                 camera.rotation.copy(c.rot);
@@ -36863,83 +36864,56 @@ class Controls {
             if (me.available) {
                 me.available = false;
                 switch(event.key){
-                    case "1":
-                        await me.movements.rotateL();
-                        break;
-                    case "q":
-                        await me.movements.rotateLp();
-                        break;
-                    case "2":
-                        await me.movements.rotateM();
-                        break;
-                    case "w":
-                        await me.movements.rotateMp();
-                        break;
-                    case "3":
-                        await me.movements.rotateR();
-                        break;
-                    case "e":
-                        await me.movements.rotateRp();
-                        break;
-                    case "4":
-                        await me.movements.rotateF();
-                        break;
-                    case "r":
-                        await me.movements.rotateFp();
-                        break;
-                    case "5":
-                        await me.movements.rotateS();
-                        break;
-                    case "t":
-                        await me.movements.rotateSp();
-                        break;
-                    case "6":
-                        await me.movements.rotateB();
-                        break;
-                    case "y":
-                        await me.movements.rotateBp();
-                        break;
-                    case "7":
-                        await me.movements.rotateD();
-                        break;
-                    case "u":
-                        await me.movements.rotateDp();
-                        break;
-                    case "8":
-                        await me.movements.rotateE();
-                        break;
-                    case "i":
-                        await me.movements.rotateEp();
-                        break;
-                    case "9":
-                        await me.movements.rotateU();
-                        break;
-                    case "o":
-                        await me.movements.rotateUp();
-                        break;
-                    case "a":
-                        await me.movements.rotateX();
-                        break;
-                    case "s":
-                        await me.movements.rotateY();
-                        break;
-                    case "d":
-                        await me.movements.rotateZ();
-                        break;
-                    case "z":
-                        await me.movements.rotateXp();
-                        break;
-                    case "x":
-                        await me.movements.rotateYp();
-                        break;
-                    case "c":
-                        await me.movements.rotateZp();
-                        break;
+                    // case '1': await me.movements.rotateL();
+                    // break;
+                    // case 'q': await me.movements.rotateLp();
+                    // break;
+                    // case '2': await me.movements.rotateM()
+                    // break;
+                    // case 'w': await me.movements.rotateMp()
+                    // break;
+                    // case '3': await me.movements.rotateR()
+                    // break;
+                    // case 'e': await me.movements.rotateRp()
+                    // break;
+                    // case '4': await me.movements.rotateF()
+                    // break;
+                    // case 'r': await me.movements.rotateFp()
+                    // break;
+                    // case '5': await me.movements.rotateS()
+                    // break;
+                    // case 't': await me.movements.rotateSp()
+                    // break;
+                    // case '6': await me.movements.rotateB()
+                    // break;
+                    // case 'y': await me.movements.rotateBp()
+                    // break;
+                    // case '7': await me.movements.rotateD()
+                    // break;
+                    // case 'u': await me.movements.rotateDp()
+                    // break;
+                    // case '8': await me.movements.rotateE()
+                    // break;
+                    // case 'i': await me.movements.rotateEp()
+                    // break;
+                    // case '9': await me.movements.rotateU()
+                    // break;
+                    // case 'o': await me.movements.rotateUp()
+                    // break;
+                    // case 'a': await me.movements.rotateX()
+                    // break;
+                    // case 's': await me.movements.rotateY()
+                    // break;
+                    // case 'd': await me.movements.rotateZ()
+                    // break;
+                    // case 'z': await me.movements.rotateXp()
+                    // break;
+                    // case 'x': await me.movements.rotateYp()
+                    // break;
+                    // case 'c': await me.movements.rotateZp()
+                    // break;
                     case " ":
                         await me.algorithmApplier.scrumbble();
-                        break;
-                    case "Enter":
-                        await me.algorithmApplier.solve();
                         break;
                 }
                 me.available = true;
@@ -36953,7 +36927,7 @@ class Controls {
     }
 }
 
-},{"three":"ktPTu","./movements":"75xTQ","./algorithmsApplier":"btYDf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"75xTQ":[function(require,module,exports) {
+},{"three":"ktPTu","./movements":"75xTQ","./algorithmsApplier":"btYDf","three/examples/jsm/renderers/CSS2DRenderer":"3tWLO","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@tweenjs/tween.js":"7DfAI"}],"75xTQ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Movements", ()=>Movements);
@@ -37033,7 +37007,6 @@ class AlgorithmsApplier {
         this._movesMap = movements.movesMap;
     }
     async applyAlgorithm(algorithm) {
-        console.log("se aplcia el algoritmo ", algorithm);
         var possibleMovements = this._movesMap;
         var rest = algorithm.map((m)=>{
             if (possibleMovements.map((p)=>p.letter).indexOf(m) == -1) return m;
@@ -37077,7 +37050,6 @@ class AlgorithmsApplier {
     solveCross() {
         return new Promise(async (resolve, reject)=>{
             for(let i = 0; i < 4; i++){
-                console.log("template ", this._template.printFaces());
                 const crossAlgorithms = this._algorithms.cross;
                 let algorithm = [];
                 let strickerSearchId;
@@ -37098,7 +37070,6 @@ class AlgorithmsApplier {
                 for(let j = 0; j < crossAlgorithms.length; j++){
                     const indicator = crossAlgorithms[j];
                     if (this._template[indicator.face].matrix[indicator.i][indicator.j].id == strickerSearchId) {
-                        console.log(indicator);
                         algorithm = indicator.algorithm;
                         await this.applyAlgorithm(algorithm);
                         break;
@@ -37123,7 +37094,6 @@ class AlgorithmsApplier {
                     finish = true;
                     break;
             }
-            this._template.printFaces();
             resolve();
         });
     }
